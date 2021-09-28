@@ -1,0 +1,28 @@
+{
+  "name": "class",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -e coffee,js,ejs,html,css app.js & nodemon worker.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simarpreet7/class.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simarpreet7/class/issues"
+  },
+  "homepage": "https://github.com/simarpreet7/class#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.0.8",
+    "nodemon": "^2.0.13"
+  }
+}

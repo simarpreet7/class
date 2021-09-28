@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=user%></title>
+</head>
+<body>
+    <%if(data){%>
+    <table border="5">
+        <tr>
+         <td>first name</td>
+         <td>last name</td>
+        </tr>
+        <% for(var i=0;i<data.length;++i){ %>  
+        <tr>
+            <td><%= data[i].firstName %></td>
+            <td><%= data[i].lastName%></td>
+        </tr>
+        <%}%>    
+    </table>
+    <%}else{%>
+       <h1>no data</h1> 
+    <%}%>
+</body>
+</html>
