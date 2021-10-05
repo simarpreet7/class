@@ -4,21 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=user%></title>
+    <title>web tech</title>
 </head>
 <body>
-    <%if(data){%>
+    <h2>create</h2>
+    <form action="/create" method="POST">
+    <input type="text" placeholder="firstname" name="firstName" required>
+    <input type="text" placeholder="lastname" name="lastName" required>
+    <button type="submit">create</button>
+    </form>
+    <br>
+    <br>
+    <h2>update</h2>
+    <form action="/update" method="POST">
+    <input type="text" placeholder="roll number" name="id">
+    <input type="text" placeholder="firstname" name="firstName" required>
+    <input type="text" placeholder="lastname" name="lastName" required>
+    <button type="submit">update</button>
+    </form>
+    <br>
+    <br>
+    <%if(data){%>   
     <table border="5">
         <tr>
+         <td>S no.</td>   
+         <td>roll number</td>
          <td>first name</td>
          <td>last name</td>
+         <td>delete</td>
         </tr>
+        <form method="POST">
         <% for(var i=0;i<data.length;++i){ %>  
         <tr>
+            <td><%= (i+1) %></td>
+            <td><%= data[i]._id %></td>
             <td><%= data[i].firstName %></td>
             <td><%= data[i].lastName%></td>
+            <td><button id="<%= data[i]._id %>" formaction="/delete/<%= data[i]._id %>"">delete</button></td>
         </tr>
-        <%}%>    
+        <%}%>   
+        </form> 
     </table>
     <%}else{%>
        <h1>no data</h1> 

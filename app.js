@@ -24,17 +24,50 @@ var nameSchema= new mongoose.Schema({
 })   
 var User=mongoose.model("User",nameSchema)
 app.set("view engine","ejs")
-app.get('/name/:id',(req,res)=>{
+app.get('/name',(req,res)=>{
   User.find({},(err,docs)=>{
     if(err)
     return res.send(err)
     else if(_.isEmpty(docs))
     return  res.render("index",{data:null})
     else{
-    return  res.render("index",{data:docs,user:req.params.id})
+    return  res.render("index",{data:docs})
     }
   })
 
+})
+app.post('/delete/:id',(req,res)=>{
+  if(req.params.id){
+    User.remove({_id:req.params.id}).then((item)=>{
+      return res.redirect("/name")
+    }).catch((err)=>{
+      return res.send(err)
+    })
+  }
+  else{
+    res.send("no id")
+  }
+})
+
+app.post('/create',(req,res)=>{
+  var data=new User(req.body)
+  data.save().then(item=>{
+    res.redirect("/name")
+  }).catch(err=>{
+    res.send(err)
+  })
+})
+
+app.post('/update',(req,res)=>{
+  let update={
+    firstName:req.body.firstName,
+    lastName:req.body.lastName
+  }
+  User.updateOne({_id:req.body.id},update).then(item=>{
+    res.redirect("/name")
+  }).catch(err=>{
+    res.send(err);
+  })
 })
 
 app.listen(PORT,()=>{
