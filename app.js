@@ -1,11 +1,11 @@
 var app=require('express')();
-const PORT=3000;
+const PORT=process.env.PORT||3000;
 const bodyParser = require('body-parser');
 const _=require('lodash')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 var mongoose=require('mongoose')
-const url="mongodb://localhost/node-demo"
+const url=process.env.URL||"mongodb://localhost/node-demo"
 const connectionParams = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
