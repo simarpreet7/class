@@ -24,7 +24,12 @@ var nameSchema= new mongoose.Schema({
 })   
 var User=mongoose.model("User",nameSchema)
 app.set("view engine","ejs")
-app.get('/name',(req,res)=>{
+
+app.get("/wow",(req,res)=>{
+  res.sendFile(__dirname+"//views//wow.html")
+})
+
+app.get('/',(req,res)=>{
   User.find({},(err,docs)=>{
     if(err)
     return res.send(err)
@@ -38,8 +43,8 @@ app.get('/name',(req,res)=>{
 })
 app.post('/delete/:id',(req,res)=>{
   if(req.params.id){
-    User.remove({_id:req.params.id}).then((item)=>{
-      return res.redirect("/name")
+    User.deleteOne({_id:req.params.id}).then((item)=>{
+      return res.redirect("/")
     }).catch((err)=>{
       return res.send(err)
     })
@@ -52,7 +57,7 @@ app.post('/delete/:id',(req,res)=>{
 app.post('/create',(req,res)=>{
   var data=new User(req.body)
   data.save().then(item=>{
-    res.redirect("/name")
+    res.redirect("/")
   }).catch(err=>{
     res.send(err)
   })
@@ -64,7 +69,7 @@ app.post('/update',(req,res)=>{
     lastName:req.body.lastName
   }
   User.updateOne({_id:req.body.id},update).then(item=>{
-    res.redirect("/name")
+    res.redirect("/")
   }).catch(err=>{
     res.send(err);
   })
